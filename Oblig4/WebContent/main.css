@@ -1,0 +1,37 @@
+melding {
+    color: red;
+}
+
+input[type="text"], input[type="password"] {
+     border-radius: 5px;
+     border-width: 1px;
+}
+
+body {
+    margin: 10px;
+}
+
+fieldset {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    grid-gap:10px;
+}
+
+label, .columnfirst {
+    text-align: right;
+}
+
+button {
+    grid-column: 1/3;
+}
+
+div[data-info] {
+	margin: 10px 0;
+	border: 1px solid red;
+	padding: 0;
+}
+
+div[data-info] p {
+	margin: 0;
+	padding: 5px;
+}

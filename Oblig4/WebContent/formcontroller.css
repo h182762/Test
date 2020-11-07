@@ -1,0 +1,29 @@
+.formcontroller_hidden {
+    display: none;
+}
+
+.formcontroller_validInput {
+	/* lysegrønn */
+    background-color: rgb(200, 255, 200);
+}
+
+.formcontroller_invalidInput {
+    /* lyserød */
+    background-color: rgb(255, 200, 200);
+}
+
+.formcontroller_strongPassword {
+    /* lysegrønn */
+    background-color: rgb(200, 255, 200);
+}
+
+.formcontroller_mediumPassword {
+	/* lysegul */
+	background-color: rgb(255, 255, 170);
+
+}
+
+.formcontroller_weakPassword {
+	/* lyserød */
+    background-color: rgb(255, 200, 200)
+}

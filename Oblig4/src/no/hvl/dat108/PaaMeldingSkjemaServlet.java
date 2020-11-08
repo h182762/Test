@@ -3,7 +3,6 @@ package no.hvl.dat108;
 import java.io.IOException;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,17 +28,8 @@ public class PaaMeldingSkjemaServlet extends HttpServlet {
 
 		Person person = Utils.behandleInputs(request, response, dao);
 		if (person == null || dao.finnes(person.getMobilNr())) {
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/paameldingsskjema.jsp");
-			try {
-				rd.forward(request, response);
-			} catch (ServletException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			Utils.redirectPaamelding(request, response);
 		} else {
-
-			
 			HttpSession sesjon = request.getSession(false);
 			if (sesjon != null) {
 				sesjon.invalidate();
@@ -51,11 +41,7 @@ public class PaaMeldingSkjemaServlet extends HttpServlet {
 			dao.leggtilDeltaker(person);
 			sesjon.setAttribute("nyDeltaker", person);
 
-			try {
-				response.sendRedirect("deltakerliste");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			response.sendRedirect("paameldingsbekreftelse");
 		}
 	}
 

@@ -11,8 +11,6 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class PersonDAO {
 
-	
-
 	@PersistenceContext(name = "personPU")
     private EntityManager em;
 	
@@ -51,9 +49,5 @@ public class PersonDAO {
     	}
     	return null;
     }
-
-	
-
-	
 
 }

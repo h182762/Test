@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
 @WebServlet("/deltakerliste")
 public class DeltakerListeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,10 +23,9 @@ public class DeltakerListeServlet extends HttpServlet {
 		List<Person> deltakere = dao.hentDeltakere();
 
 		HttpSession sesjon = request.getSession(false);
-		boolean innlogget = (boolean) sesjon.getAttribute("innlogget");
 		
-		if (sesjon == null || innlogget == false) {
-			response.sendRedirect("paamelding.jsp");
+		if (sesjon == null || sesjon.getAttribute("innlogget") == null) {
+			response.sendRedirect("paamelding");
 		} else {
 		request.setAttribute("nyDeltaker", sesjon.getAttribute("nyDeltaker"));
 		request.setAttribute("deltakerliste", deltakere);
@@ -38,9 +35,4 @@ public class DeltakerListeServlet extends HttpServlet {
 		
 		}
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
 }

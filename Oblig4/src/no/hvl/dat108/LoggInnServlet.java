@@ -3,7 +3,6 @@ package no.hvl.dat108;
 import java.io.IOException;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,28 +32,17 @@ public class LoggInnServlet extends HttpServlet {
 		String passord = request.getParameter("passord");
 
 		if (passord == null || dao.finnes(brukernavn) == false) {
-			redirectError(request, response);
+			Utils.logginnError(request, response);
 		}
 
 		if (!passUtil.sjekkPassord(passord, dao.finnPassord(brukernavn))) {
-			redirectError(request, response);
+			Utils.logginnError(request, response);
 		} else {
-
 			HttpSession sesjon = request.getSession(false);
-			if (sesjon != null) {
-				sesjon.invalidate();
-			}
-			sesjon = request.getSession(true);
-			sesjon.setMaxInactiveInterval(10);
-			sesjon.setAttribute("innlogget", true);
+			Utils.sesjonLoggetInn(sesjon, request);
 
 			response.sendRedirect("deltakerliste");
 		}
 	}
 
-	private void redirectError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("logginnError", "Ugyldig brukernavn og/eller passord");
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/logginn.jsp");
-		rd.forward(request, response);
-	}
 }// class

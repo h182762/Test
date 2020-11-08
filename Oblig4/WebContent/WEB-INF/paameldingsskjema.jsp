@@ -64,7 +64,6 @@
 				<label for="passordRepetert">Passord repetert:</label> 
 				<input type="password" name="passordRepetert" value="${passordRepetert}">
 					
-					
 					<font color="red"><c:out value="${passordRepetertError}" /></font>
 			</div>
 			

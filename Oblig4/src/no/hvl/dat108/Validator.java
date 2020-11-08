@@ -6,24 +6,20 @@ public class Validator {
 
 	private final static String ANY_LETTER = "[A-ZØÆÅa-zøæå]+?";
 	private final static String ANY_LETTER_WITH_SPACE_AND_HYPHEN = "[A-ZØÆÅa-zøæå]+(?:(\\s|-)[A-ZØÆÅa-zøæå]+)?";// "[a-zA-ZæøåÆØÅ]([\\w
-	// private final String ANY_LETTER_OR_DIGIT = "[a-zA-Z0-9æøåÆØÅ0-9]";
 	private final static String FIRST_CASE_UPPER_LETTER = "[A-ZØÆÅ]";
-	// private final String THREE_TIMES = "{2}";
 	private final static String TWO_TO_TWENTY_LETTERS = "(?=.{1,19}$)";
 	private final static String GYLDIG_NR = "^[0-9]{8}$";
 
 	public static boolean erGyldigFornavn(String fornavn) {
-		
+
 		return fornavn != null && fornavn.matches(
-				"^" + FIRST_CASE_UPPER_LETTER 
-				+ TWO_TO_TWENTY_LETTERS + ANY_LETTER_WITH_SPACE_AND_HYPHEN + "$");
-		
+				"^" + FIRST_CASE_UPPER_LETTER + TWO_TO_TWENTY_LETTERS + ANY_LETTER_WITH_SPACE_AND_HYPHEN + "$");
 	}
 
 	public static boolean erGyldigEtternavn(String etternavn) {
 
-		return etternavn != null && etternavn.matches("^" + FIRST_CASE_UPPER_LETTER 
-				+ TWO_TO_TWENTY_LETTERS + ANY_LETTER + "$");
+		return etternavn != null
+				&& etternavn.matches("^" + FIRST_CASE_UPPER_LETTER + TWO_TO_TWENTY_LETTERS + ANY_LETTER + "$");
 	}
 
 	public static boolean erGyldigNr(String mobilnr) {
@@ -62,8 +58,8 @@ public class Validator {
 
 	}
 
-	public static boolean gyldigeInputs(String fornavn, String etternavn, String mobilnr, 
-			String passord, String passordRepetert, String kjonn, HttpServletRequest request) {
+	public static boolean gyldigeInputs(String fornavn, String etternavn, String mobilnr, String passord,
+			String passordRepetert, String kjonn, HttpServletRequest request) {
 		boolean errors = false;
 		if (!erGyldigFornavn(fornavn)) {
 			request.setAttribute("fornavnError", "Ugyldig fornavn");
@@ -99,7 +95,6 @@ public class Validator {
 			errors = true;
 		}
 
-		
 		if (kjonn == null) {
 			request.setAttribute("kjonnError", "Du må oppgi kjønn");
 			errors = true;
@@ -123,8 +118,4 @@ public class Validator {
 			request.setAttribute("passordStyrke", "Svakt passord");
 		}
 	}
-
-	
-	
-
 }

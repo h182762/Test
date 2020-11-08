@@ -6,55 +6,52 @@ import org.junit.jupiter.api.Test;
 
 class ValidatorTest {
 
-	// NAVN TESTER
 	
 	@Test
-	public void ikkeMindreEnn3() {
+	public void erGyldigFornavn() {
+		//Lengde på fornavn
 		assertFalse(Validator.erGyldigFornavn(""));
 		assertFalse(Validator.erGyldigFornavn("P"));
 		assertTrue(Validator.erGyldigFornavn("Pe"));
 		assertTrue(Validator.erGyldigFornavn("Per"));
-	}
-	
-	@Test
-	public void ikkeStørreEnn20() {
+		
 		assertTrue(Validator.erGyldigFornavn("Abcdefghijklmnopqrs"));
 		assertTrue(Validator.erGyldigFornavn("Abcdefghijklmnopqrst"));
 		assertFalse(Validator.erGyldigFornavn("Abcdefghijklmnopqrstu"));
 		assertFalse(Validator.erGyldigFornavn("Abcdefghijklmnopqrstuv"));
-	}
-	
-	@Test
-	public void harStorForbokstav() {
+		
+		//Stor forbokstav
 		assertFalse(Validator.erGyldigFornavn("frank"));
-		assertFalse(Validator.erGyldigFornavn("ømer"));
-		assertTrue(Validator.erGyldigFornavn("Ømer"));
 		assertTrue(Validator.erGyldigFornavn("Frank"));
-	}
-	
-	@Test
-	public void fornavnKanInneholdeMellomromOgBindestrek() {
+		
+		//Kan ha 1 bindestrek eller 1 mellomrom
 		assertTrue(Validator.erGyldigFornavn("Frank roger"));
 		assertTrue(Validator.erGyldigFornavn("Frank-roger"));
 		assertFalse(Validator.erGyldigFornavn("Frank--roger"));
 		assertFalse(Validator.erGyldigFornavn("Frank  roger"));
 	}
 	
+	
 	@Test
-	public void etternavnIkkeStørreEnn20() {
-		assertTrue(Validator.erGyldigEtternavn("Abcdefghijklmnopqrs"));
+	public void gyldigEtternavn() {
 		assertTrue(Validator.erGyldigEtternavn("Abcdefghijklmnopqrst"));
 		assertFalse(Validator.erGyldigEtternavn("Abcdefghijklmnopqrstu"));
-		assertFalse(Validator.erGyldigEtternavn("Abcdefghijklmnopqrstuv"));
-	}
-	
-	@Test
-	public void etternavnIkkeMellomromEllerBindeStrek() {
+		
+		//Ikke bindestrek eller mellomrom
 		assertFalse(Validator.erGyldigEtternavn("Frank roger"));
 		assertFalse(Validator.erGyldigEtternavn("Frank-roger"));
+	
+	}
+
+	@Test
+	public void gyldigMobilNr() {
+		assertFalse(Validator.erGyldigNr("asdfghj"));
+		assertFalse(Validator.erGyldigNr("asdfghjk"));
+		assertFalse(Validator.erGyldigNr("1234567"));
+		assertFalse(Validator.erGyldigNr("123456789"));
+		assertTrue(Validator.erGyldigNr("12345678"));
 	}
 	
-
 }
 
 
